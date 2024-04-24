@@ -57,3 +57,5 @@ console.log("");
 console.log(personen.lastIndexOf("Anna"));
 console.log(personen.lastIndexOf("Anna", 1));
 console.log(personen.lastIndexOf("Anna", 1));
+
+//test
