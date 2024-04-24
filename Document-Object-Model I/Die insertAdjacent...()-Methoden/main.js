@@ -21,9 +21,26 @@ a.appendChild(text);
     // bekommt dass a element mit seien 2 Attributen und dem Textelement als Inhalt.
 li.appendChild(a);
 
-console.log(li);
 
 // Alles innerhalb der ul in #navigation holen und in ket liste halten.
 let liste = document.querySelector("#navigation > ul");
 // Der liste/"#navigation > ul" => mit appendChild unser li anhängen, mitgeben (auf letztem Platz in ul.)
-liste.appendChild(li);
+// liste.appendChild(li);
+
+
+// In (let liste) => (insert) + wo(Adjacend=benachbartes) + was(Element).
+
+// liste.insertAdjacentElement("beforebegin", li);
+// liste.insertAdjacentElement("afterbegin", li);
+// liste.insertAdjacentElement("beforeend", li);
+// liste.insertAdjacentElement("afterend", li);
+
+// In (let liste) => (insert) + wo(Adjanced=benachbartes) + was(HTML).
+// DOM-String
+// Bei li mit Backslash die 2 ten Anführungszeichen escapen  \".........\" .
+let dom_string = "<li id=\"mein-listelement\"><a id=\"mein-ankerelement\" href=\"#\">Element</a></li>";
+
+// liste.insertAdjacentHTML("beforebegin", dom_string);
+// liste.insertAdjacentHTML("afterbegin", dom_string);
+// liste.insertAdjacentHTML("beforeend", dom_string);
+// liste.insertAdjacentHTML("afterend", dom_string);
