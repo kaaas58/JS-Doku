@@ -53,8 +53,17 @@ const haushaltsbuch = {
             return true;
         } else {
             return false;
-        }
+      
+      }
     },
+
+    
+    // titel_validieren_neu = titel => (titel !== "") ? `true` : `false` ,
+
+    // titel_validieren_new = titel => titel !== "",
+
+
+
 // -------------------------------  betrag_verarbeiten mit betrag-validieren
     betrag_verarbeiten(betrag) {
         betrag = betrag.trim();
