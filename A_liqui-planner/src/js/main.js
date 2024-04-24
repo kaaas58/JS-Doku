@@ -61,7 +61,7 @@ const haushaltsbuch = {
     // titel_validieren_neu = titel => (titel !== "") ? `true` : `false` ,
 
     // titel_validieren_new = titel => titel !== "",
-// 'jöljklö'
+// 'jöljklö'gjh
 
 
 // -------------------------------  betrag_verarbeiten mit betrag-validieren
