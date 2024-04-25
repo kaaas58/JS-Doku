@@ -22,6 +22,18 @@ console.log(outerHeight);
 console.log(scrollX);   // X Links = 0 / Rechts = (+) Bsp(121..) horizontal .
 console.log(scrollY);   // Y Oben = 0 / Unten = (+) Bsp(123..) vertical .
 
-Fjkljekljc fddsf dffds
+// Für später im Kurs..
+console.log(location);
+console.log(localStorage);
+console.log(sessionStorage);
 
-Inner und Outer Height ?
+// Methoden des window-Objekts
+alert("ACHTUNG!");
+
+
+
+
+// EXTRA FEHLER !!!
+// Fjkljekljc fddsf dffds
+
+// Inner und Outer Height ?
