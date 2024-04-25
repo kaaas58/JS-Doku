@@ -27,13 +27,21 @@ console.log(location);
 console.log(localStorage);
 console.log(sessionStorage);
 
+
+
 // Methoden des window-Objekts
+
+// Wirft eine Popup mit Alarm, mit dem (String("  ")) und dem Button "OK".
 alert("ACHTUNG!");
-
-
+// Wirft ein Popup mit der Message (String("  ")) und den Buttons "OK", "Abdrechen".
+confirm("Bist du dir sicher ?");
+// Erzeugt einen Prompt "Wie geht es dir?" im Browser und 
+    // speichert in der Variable (antwort), die Rückgabe aus dem Prompt.
+let antwort = prompt("Wie geht es dir?");
+console.log(antwort);
 
 
 // EXTRA FEHLER !!!
-// Fjkljekljc fddsf dffds
+Fjkljekljc fddsf dffds
 
-// Inner und Outer Height ?
+Inner und Outer Height ?
