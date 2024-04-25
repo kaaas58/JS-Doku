@@ -33,15 +33,40 @@ console.log(sessionStorage);
 
 // Wirft eine Popup mit Alarm, mit dem (String("  ")) und dem Button "OK".
 alert("ACHTUNG!");
+
 // Wirft ein Popup mit der Message (String("  ")) und den Buttons "OK", "Abdrechen".
 confirm("Bist du dir sicher ?");
+
 // Erzeugt einen Prompt "Wie geht es dir?" im Browser und 
     // speichert in der Variable (antwort), die Rückgabe aus dem Prompt.
 let antwort = prompt("Wie geht es dir?");
 console.log(antwort);
 
 
-// EXTRA FEHLER !!!
-Fjkljekljc fddsf dffds
 
-Inner und Outer Height ?
+
+// --------------------------- Differenzierte Methoden / Befehle
+
+// print();
+
+open("https://www.google.com");
+
+// close("https://www.google.com");
+
+
+// setTimeout(function(){
+//     open("https://www.google.com");
+// }, 4000);
+
+// setTimeout(function(){
+//     close();
+// }, 8000);
+
+let nav = dacument.document.querySelector("#navigation");
+getComputedStyle(nav);
+
+// EXTRA FEHLER !!!
+
+// Fjkljekljc fddsf dffds
+
+// Inner und Outer Height ?
