@@ -22,3 +22,6 @@ console.log(outerHeight);
 console.log(scrollX);   // X Links = 0 / Rechts = (+) Bsp(121..) horizontal .
 console.log(scrollY);   // Y Oben = 0 / Unten = (+) Bsp(123..) vertical .
 
+Fjkljekljc fddsf dffds
+
+Inner und Outer Height ?
