@@ -10,7 +10,7 @@ console.log(window);
 console.log(innerWidth);
 console.log(innerHeight);
 
-// // // // // // // // // // Outer inner vertauscht...FIXME // // // // // // // // //
+// // // // // // //  inner outer ist von Zoom des innerObjektes abhängig // // // // // // // // //
 
 // Bereich ganzes Browser Fenster
 console.log("---");
@@ -49,7 +49,7 @@ console.log(antwort);
 
 // print();
 
-open("https://www.google.com");
+// open("https://www.google.com");
 
 // close("https://www.google.com");
 
@@ -65,8 +65,3 @@ open("https://www.google.com");
 let nav = dacument.document.querySelector("#navigation");
 getComputedStyle(nav);
 
-// EXTRA FEHLER !!!
-
-// Fjkljekljc fddsf dffds
-
-// Inner und Outer Height ?
