@@ -102,64 +102,69 @@ const haushaltsbuch = {
         });
     },
 
-// --------------------------------------------- eintraege_ausgeben()
-// ---------------------------------------------------------------------------------------- wird durch HTML ersetzt
-    // eintraege_ausgeben() {
-    //     console.clear();
-    //     this.eintraege.forEach(function(eintrag) {
-    //         console.log(`Titel: ${eintrag.get("titel")}\n`
-    //             + `Typ: ${eintrag.get("typ")}\n`
-    //             + `Betrag: ${(eintrag.get("betrag") / 100).toFixed(2)} €\n`
-    //             + `Datum: ${eintrag.get("datum").toLocaleDateString("de-DE", {
-    //                 year: "numeric",
-    //                 month: "2-digit",
-    //                 day: "2-digit"
-    //             })}`
-    //         );
-    //     });
-    // },
+    html_eintrag_generieren(eintrag){                                                              
 
-
-//     
-//         <li class="einnahme">
-//             <span class="datum">01.02.2020</span>
-//             <span class="titel">Gehalt</span>
-//             <span class="betrag">2064,37 €</span>
-//             <button class="entfernen-button"><i class="fas fa-trash"></i></button>
-//         </li>
-// </ul>
-
-    html_eintrag_generieren(eintrag){
-        let listenpunkt = document.createElement("li");
-        if(eintrag.get("typ") === "einnahme"){
-            listenpunkt.setAttribute("class", "einnahme");
-        }else if(eintrag.get("typ") === "ausgabe"){
-            listenpunkt.setAttribute("class", "ausgabe");
+        let listenpunkt = document.createElement("li");     // "li" - Element erzeugen einnahme/ausgabe                          //
+        if(eintrag.get("typ") === "einnahme"){                                                 
+            listenpunkt.setAttribute("class", "einnahme");    // Den Wert der Eigenschaft "class" je nach abgefragtem typ                   
+        }else if(eintrag.get("typ") === "ausgabe"){             // auf eingabe oder ausgabe setzen      
+            listenpunkt.setAttribute("class", "ausgabe");                                          
         }
-        listenpunkt.setAttribute("data-timestamp" ,eintrag.get("time-stamp"));
+        listenpunkt.setAttribute("data-timestamp" ,eintrag.get("timestamp")); // Neues Attribut data-timestamp setzen
 
-        let datum = document.createElement("span");
+
+        // Variable (datum) als (span)Element erzeugen, das Attribut Klasse
+            // und den Wert ("datum") geben. 
+            // Der Variable (datum), dem Element "class" den Inhalt/Wert("datum") geben. 
+            // mit get("datum") den Wert Quasi aus dem prompt oben laden und mit toLocalDateString
+            // in das in Deutschland gängige Format wandeln. // Nach angegebenen Parametern year, month, day.
+            // Setzt das datum mit Adjacent(benachbartes)Element nach dem Begin des (listenpunkt) Elements.
+        let datum = document.createElement("span");         // "span" - datum erzeugen 
         datum.setAttribute("class", "datum");
         datum.textContent = eintrag.get("datum").toLocaleDateString("de-DE", {
             year: "numeric",
             month: "2-digit",
-            day: "2-digit"
-        }),
+            day: "2-digit"                                                                      
+        }), 
         listenpunkt.insertAdjacentElement("afterbegin", datum);
 
-        let titel = document.createElement("span");
+
+       // Variable (titel) als (span)Element erzeugen, das Attribut "class"
+            // und den Wert ("titel") geben.
+            // Der Variable (titel) den Inhalt/Wert("titel") mit get("titel") aus dem prompt oben laden.
+            // Mit datum.insertAdjacmentElement => afterend direkt hinter datum anhängen/setzen.
+        let titel = document.createElement("span");         // "span" - titel erzeugen
         titel.setAttribute("class", "titel");
         titel.textContent = eintrag.get("titel");
         datum.insertAdjacentElement("afterend", titel);
 
-        let betrag = document.createElement("span");
+        // Variable (betrag) als (span)Element erzeugen, das Attribut "class"
+            // und den Wert ("betrag") geben.
+            // Der Inhalt/Wert("betrag") mit get("betrag") aus dem prompt oben laden.
+            // Mit titel.insertAdjacmentElement => afterend direkt hinter titel anhängen/setzen.
+        let betrag = document.createElement("span");        // "span" betrag erzeugen
         betrag.setAttribute("class", "betrag");
-        betrag.textContent = eintrag.get("betrag");
+        betrag.textContent = `${(eintrag.get("betrag") / 100).toFixed(2).replace(/\./, ",")} €`;
         titel.insertAdjacentElement("afterend", betrag);
+
+        // Variable (button) als ("button")Element im Dokument erzeugen.
+            // Mit betrag.insertAdjacmentElement => afterend direkt hinter betrag anhängen/setzen.
+        let button = document.createElement("button");
+        button.setAttribute("class", "entfernen-button");
+        betrag.insertAdjacentElement("afterend", button);
         
+        // Variable (icon) als ("i")Element im Dokument erzeugen.
+            // Mit icon.insertAdjacmentElement => afterbegin direkt hinter betrag anhängen/setzen.
+        let icon = document.createElement("i");
+        icon.setAttribute("class", "fas fa-trash");
+        button.insertAdjacentElement("afterbegin", icon);
+        // (titel, betrag, button und icon) je an das vorherige Element mit (.insertAdjacentElement("afterbegin")) gehangt.
+    
+    
+        return listenpunkt;
     },
 
-    intraege_anzeigen(){
+    eintraege_anzeigen(){
 
             document.querySelectorAll(".monatsliste ul").forEach(function(eintragsliste){
                 eintragsliste.remove();
@@ -167,7 +172,7 @@ const haushaltsbuch = {
 
             let eintragsliste = document.createElement("ul");
             for(let eintrag of this.eintraege){
-                eintragsliste.insertAdjacentElement(bevoreend, this.html_eintrag_generieren(eintrag));
+                eintragsliste.insertAdjacentElement("beforeend", this.html_eintrag_generieren(eintrag));
             }
             document.querySelector(".monatsliste").insertAdjacentElement("afterbegin", eintragsliste);
     },
@@ -198,19 +203,29 @@ const haushaltsbuch = {
         });
         this.gesamtbilanz = neue_gesamtbilanz;
     },
-    // ----------------------------------------------------------------------------------------- wird durch HTML ersetzt
-// ------------------------------------------- gesamtbilanz_ausgeben
-    // gesamtbilanz_ausgeben() {
-    //     console.log(`Einnahmen: ${(this.gesamtbilanz.get("einnahmen") / 100).toFixed(2)} €\n`
-    //         + `Ausgaben: ${(this.gesamtbilanz.get("ausgaben") / 100).toFixed(2)} €\n`
-    //         + `Bilanz: ${(this.gesamtbilanz.get("bilanz") / 100).toFixed(2)} €\n`
-    //         + `Bilanz ist positiv: ${(this.gesamtbilanz.get("bilanz") / 100) >= 0}`
-    //     );
-    // },
+  
 
-    // --------------------------------------------------------------------------------------- html_gesamtbilanz_generieren()
-    // --------------------------------------------------------------------------------------- gesamtbilanz ausgeben()
+    // <!-- Gesamtbilanz -->
+    // <aside id="gesamtbilanz">
+    //     <h1>Gesamtbilanz</h1>
+    //     <div class="gesamtbilanz-zeile einnahmen"><span>Einnahmen:</span><span>0,00€</span></div>
+    //     <div class="gesamtbilanz-zeile ausgaben"><span>Ausgaben:</span><span>0,00€</span></div>
+    //     <div class="gesamtbilanz-zeile bilanz"><span>Bilanz:</span><span class="positiv">0,00€</span></div>
+    // </aside>
 
+    // ---------------------------------- html_gesamtbilanz_generieren()
+
+    gesamtbilanz_anzeigen(){
+
+        document.querySelectorAll("#gesamtbilanz").forEach(function(gesamtbilanz){
+                gesamtbilanz.remove();
+        });
+        document.querySelector("body").insertAdjacentElement("bevoreend", "gesamtbilanz");
+    },
+
+    // ---------------------------------- gesamtbilanz ausgeben()
+                // prüfen ob bereits Gesammtbilanz angezeigt wird wenn ja entfernen
+                    // neue Gesmtbilanz anzeigen ges generieren
 
 
 
@@ -222,10 +237,9 @@ const haushaltsbuch = {
             this.eintrag_erfassen();
             if (this.fehler.length === 0){
                 this.eintraege_sortieren();
-                //Methoden anpassen
                 this.eintraege_anzeigen();
                 this.gesamtbilanz_erstellen();
-                this.gesamtbilanz_ausgeben();
+                this.gesamtbilanz_anzeigen();
             }else{
                 this.fehler = []; // Setzt array auf leer.
             }
