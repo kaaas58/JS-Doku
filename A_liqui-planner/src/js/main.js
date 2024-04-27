@@ -205,6 +205,7 @@ const haushaltsbuch = {
     },
   
 
+    
     // <!-- Gesamtbilanz -->
     // <aside id="gesamtbilanz">
     //     <h1>Gesamtbilanz</h1>
