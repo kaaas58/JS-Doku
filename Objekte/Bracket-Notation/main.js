@@ -25,6 +25,7 @@ let inhaber2 = {
 //Inhaber übergeben über Variable | variaberl verschachteltes Objekt.
 
 
+
 let konto1 = {
     iban: "DE1025454",
     bic: "1025454",
