@@ -2,6 +2,13 @@
 
 const eingabeformular = {
 
+    absenden_event_hinzufuegen(eingabeformular) {
+        eingabeformular.querySelector("#eingabeformular").addEventListener("submit", e => {
+            e.preventDefault();
+            // 
+        });
+    },
+
     html_generieren() {
 
         let eingabeformular = document.createElement("section");
@@ -31,6 +38,8 @@ const eingabeformular = {
         <div class="eingabeformular-zeile">
             <button class="standard" type="submit" form="eingabeformular">Hinzufügen</button>
         </div>`;
+
+        this.absenden_event_hinzufuegen(eingabeformular);
 
         return eingabeformular;
     },
