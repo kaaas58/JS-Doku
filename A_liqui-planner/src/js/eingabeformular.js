@@ -58,7 +58,6 @@ const eingabeformular = {
     absenden_event_hinzufuegen(eingabeformular) {
         eingabeformular.querySelector("#eingabeformular").addEventListener("submit", e => {
             e.preventDefault();
-            // formulartdaten hole und Formulardaten verarbeiten
             let formulardaten = this.formulardaten_verarbeiten(this.formulardaten_holen(e));
             console.log(formulardaten);
             let formular_fehler = this.formulardaten_validieren(formulardaten);
@@ -70,33 +69,47 @@ const eingabeformular = {
                 this.datum_aktualisieren();
             }else{
 
+                this.fehlerbox_anzeigen(formular_fehler);
+
             }
-            // wenn formulardaten falide sind
-                // Eintrag zum Haushaltsbuch hinzufuegen
-                // wenn bereits Fehlermeldung angezeigtr wird 
-                    // Fehlermeldung entfernen 
-                // Formular zurücksetzen
-                // Datum auf den heutigen tag setzen
-                // wenn die Fehlermeldung NICHT valide sind
-                // wenn bereits fehlermeldung angezeigt wird
-                // Fehlermeldung entfernen 
-                // Fehlermeldung in Eingabeformular-Container anzeigen
+       
+
             });
         },
+
+        html_fehlerbox_generieren(formular_fehler){
+
+            let fehlerbox = document.createElement("div");
+            fehlerbox.setAttribute("class", "fehlerbox");
+
+            let fehlertext = document.createElement("span");
+            fehlertext.textContent = "Folgende Felder wurden nicht korrekt ausgefüllt:";
+            fehlerbox.insertAdjacentElement("afterbegin", fehlertext);
+
+            let fehlerliste = document.createElement("ul");
+            formular_fehler.forEach(fehler => {
+                let fehlerlistenpunkt = document.createElement("li");
+                fehlerlistenpunkt.textContent = fehler;
+                fehlerliste.insertAdjacentElement("beforeend", fehlerlistenpunkt);
+            });
+            fehlerbox.insertAdjacentElement("beforeend", fehlerliste);
+
+            return fehlerbox;
+        },
+
+        fehlerbox_anzeigen(formular_fehler){
+            let eingabeformular_container = document.querySelector("#eingabeformular-container");
+            if(eingabeformular_container !== null){
+                eingabeformular_container.insertAdjacentElement("afterbegin", this.html_fehlerbox_generieren(formular_fehler));
+            }
+        },
+
         
         html_generieren() {
             
             let eingabeformular = document.createElement("section");
             eingabeformular.setAttribute("id", "eingabeformular-container");
-            eingabeformular.innerHTML = `<div class="fehlerbox">
-                <span>Es gibt Fehler in folgenden Eingabefeldern:</span>
-                <ul>
-                    <li>Titel</li>
-                    <li>Betrag</li>
-                    <li>Datum</li>
-                </ul>
-            </div>
-            <form id="eingabeformular" action="#" method="get"></form>
+            eingabeformular.innerHTML = `<form id="eingabeformular" action="#" method="get"></form>
             <div class="eingabeformular-zeile">
                 <h1>Neue Einnahme / Ausgabe hinzufügen</h1>
             </div>
