@@ -64,11 +64,13 @@ const eingabeformular = {
             console.log(formular_fehler);
 
             if(formular_fehler.length === 0){
-                haushaltsbuch.eintrag_hinzufuegen(formulardaten)
+                haushaltsbuch.eintrag_hinzufuegen(formulardaten);
+                this.fehlerbox_entfernen();
                 e.target.reset();
                 this.datum_aktualisieren();
             }else{
 
+                this.fehlerbox_entfernen();
                 this.fehlerbox_anzeigen(formular_fehler);
 
             }
@@ -101,6 +103,13 @@ const eingabeformular = {
             let eingabeformular_container = document.querySelector("#eingabeformular-container");
             if(eingabeformular_container !== null){
                 eingabeformular_container.insertAdjacentElement("afterbegin", this.html_fehlerbox_generieren(formular_fehler));
+            }
+        },
+
+        fehlerbox_entfernen(){
+            let bestehende_fehlerbox = document.querySelector(".fehlerbox");
+            if(bestehende_fehlerbox !== null){
+                bestehende_fehlerbox.remove();
             }
         },
 
