@@ -38,3 +38,9 @@ let grosses_objekt = {
 };
 
 console.log(grosses_objekt);
+
+// Für Instanzen von Objekten
+let datumswerte = [2020, 5, 14]
+// let datum = new Date(datumswerte[0], datumswerte[1], datumswerte[2]);
+let datum = new Date(...datumswerte);
+console.log("erstelltes Datum 2 : " + datum);
