@@ -7,26 +7,25 @@ class Haushaltsbuch{
         this._monatslistensammlung = new Monatslistensammlung();
         this._gesamtbilanz = new Gesamtbilanz;
     }
-    
 
     eintrag_hinzufuegen(formulardaten) {
-        let neuer_eintrag = new Map();
-        neuer_eintrag.set("titel", formulardaten.titel);
-        neuer_eintrag.set("betrag", formulardaten.betrag);
-        neuer_eintrag.set("typ", formulardaten.typ);
-        neuer_eintrag.set("datum", formulardaten.datum);
-        neuer_eintrag.set("timestamp", Date.now());
+        let neuer_eintrag = new Eintrag(
+            formulardaten.titel, 
+            formulardaten.betrag,
+            formulardaten.typ, 
+            formulardaten.datum);
         this._eintraege.push(neuer_eintrag);
+        console.log(this);
         this._eintraege_sortieren();
         this._eintraege_anzeigen();
         this._gesamtbilanz_erstellen();
         this._gesamtbilanz_anzeigen();
 }  
 
-_eintrag_entfernen(timestamp){
+eintrag_entfernen(timestamp){
     let start_index;
     for (let i = 0; i < this._eintraege.length; i++){
-        if (this._eintraege[i].get("timestamp") === parseInt(timestamp)){
+        if (this._eintraege[i].timestamp() === parseInt(timestamp)){
             start_index = i;
             break;
         }
@@ -37,111 +36,37 @@ _eintrag_entfernen(timestamp){
     this._gesamtbilanz_anzeigen();
 
 }
-
-// -------------------------------------------- eintraege_sortieren 
     _eintraege_sortieren() {
         this._eintraege.sort((eintrag_a, eintrag_b) =>{ 
-          return  eintrag_a.get("datum") > eintrag_b.get("datum") ? -1 : eintrag_a.get("datum") < eintrag_b.get("datum") ?  1 : 0;
+          return  eintrag_a.datum() > eintrag_b.datum() ? -1 : eintrag_a.datum() < eintrag_b.datum() ?  1 : 0;
             });
-    }
-   
-
-    _html_eintrag_generieren(eintrag){                                                              
-
-        let listenpunkt = document.createElement("li");     // "li" - Element erzeugen einnahme/ausgabe                     
-        // Den Wert der Eigenschaft "class" je nach abgefragtem typ auf eingabe oder ausgabe setzen.
-        eintrag.get("typ") === "einnahme" ? listenpunkt.setAttribute("class", "einnahme") : listenpunkt.setAttribute("class", "ausgabe");
-        listenpunkt.setAttribute("data-timestamp" ,eintrag.get("timestamp")); // Neues Attribut data-timestamp setzen
-
-
-        // Variable (datum) als (span)Element erzeugen, das Attribut Klasse
-            // und den Wert ("datum") geben. 
-            // Der Variable (datum), dem Element "class" den Inhalt/Wert("datum") geben. 
-            // mit get("datum") den Wert Quasi aus dem prompt oben laden und mit toLocalDateString
-            // in das in Deutschland gängige Format wandeln. // Nach angegebenen Parametern year, month, day.
-            // Setzt das datum mit Adjacent(benachbartes)Element nach dem Begin des (listenpunkt) Elements.
-        let datum = document.createElement("span");         // "span" - datum erzeugen 
-        datum.setAttribute("class", "datum");
-        datum.textContent = eintrag.get("datum").toLocaleDateString("de-DE", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit"                                                                      
-        }), 
-        listenpunkt.insertAdjacentElement("afterbegin", datum);
-
-
-       // Variable (titel) als (span)Element erzeugen, das Attribut "class"
-            // und den Wert ("titel") geben.
-            // Der Variable (titel) den Inhalt/Wert("titel") mit get("titel") aus dem prompt oben laden.
-            // Mit datum.insertAdjacmentElement => afterend direkt hinter datum anhängen/setzen.
-        let titel = document.createElement("span");         // "span" - titel erzeugen
-        titel.setAttribute("class", "titel");
-        titel.textContent = eintrag.get("titel");
-        datum.insertAdjacentElement("afterend", titel);
-
-        // Variable (betrag) als (span)Element erzeugen, das Attribut "class"
-            // und den Wert ("betrag") geben.
-            // Der Inhalt/Wert("betrag") mit get("betrag") aus dem prompt oben laden.
-            // Mit titel.insertAdjacmentElement => afterend direkt hinter titel anhängen/setzen.
-        let betrag = document.createElement("span");        // "span" betrag erzeugen
-        betrag.setAttribute("class", "betrag");
-        betrag.textContent = `${(eintrag.get("betrag") / 100).toFixed(2).replace(/\./, ",")} €`;
-        titel.insertAdjacentElement("afterend", betrag);
-
-        // Variable (button) als ("button")Element im Dokument erzeugen.
-            // Mit betrag.insertAdjacmentElement => afterend direkt hinter betrag anhängen/setzen.
-        let button = document.createElement("button");
-        button.setAttribute("class", "entfernen-button");
-        betrag.insertAdjacentElement("afterend", button);
-        
-        // Variable (icon) als ("i")Element im Dokument erzeugen.
-            // Mit icon.insertAdjacmentElement => afterbegin direkt hinter betrag anhängen/setzen.
-        let icon = document.createElement("i");
-        icon.setAttribute("class", "fas fa-trash");
-        button.insertAdjacentElement("afterbegin", icon);
-        // (titel, betrag, button und icon) je an das vorherige Element mit (.insertAdjacentElement("afterbegin")) gehangt.
-    
-        this._eintrag_entfernen_event_hinzufuegen(listenpunkt);
-    
-        return listenpunkt;
-    }
-
-    _eintrag_entfernen_event_hinzufuegen(listenpunkt){
-        listenpunkt.querySelector(".entfernen-button").addEventListener("click", e => {
-            let timestamp = e.target.parentElement.getAttribute("data-timestamp");
-            this._eintrag_entfernen(timestamp);                                             // präfix richtig ?
-        });
     }
 
     _eintraege_anzeigen(){
 
             document.querySelectorAll(".monatsliste ul").forEach(eintragsliste => eintragsliste.remove());
             let eintragsliste = document.createElement("ul");
-            this._eintraege.forEach(eintrag => eintragsliste.insertAdjacentElement("beforeend", this._html_eintrag_generieren(eintrag)));
+            this._eintraege.forEach(eintrag => eintragsliste.insertAdjacentElement("beforeend", eintrag.html())); // getter aus Eintrag, makiert..
             document.querySelector(".monatsliste").insertAdjacentElement("afterbegin", eintragsliste);
     }
 
-
-// -------------------------------------------- gesamtbilanz_erstellen
     _gesamtbilanz_erstellen() {
         let neue_gesamtbilanz = new Map();
         neue_gesamtbilanz.set("einnahmen", 0);
         neue_gesamtbilanz.set("ausgaben", 0);
         neue_gesamtbilanz.set("bilanz", 0);
         this._eintraege.forEach((eintrag) => {
-            switch (eintrag.get("typ")) {
+            switch (eintrag.typ()) {
                 case "einnahme":
-                // case "Einnahme":
-                    neue_gesamtbilanz.set("einnahmen", neue_gesamtbilanz.get("einnahmen") + eintrag.get("betrag"));
-                    neue_gesamtbilanz.set("bilanz", neue_gesamtbilanz.get("bilanz") + eintrag.get("betrag"));
+                    neue_gesamtbilanz.set("einnahmen", neue_gesamtbilanz.get("einnahmen") + eintrag.betrag());
+                    neue_gesamtbilanz.set("bilanz", neue_gesamtbilanz.get("bilanz") + eintrag.betrag());
                     break;
                 case "ausgabe":
-                // case "Ausgabe":
-                    neue_gesamtbilanz.set("ausgaben", neue_gesamtbilanz.get("ausgaben") + eintrag.get("betrag"));
-                    neue_gesamtbilanz.set("bilanz", neue_gesamtbilanz.get("bilanz") - eintrag.get("betrag"));
+                    neue_gesamtbilanz.set("ausgaben", neue_gesamtbilanz.get("ausgaben") + eintrag.betrag());
+                    neue_gesamtbilanz.set("bilanz", neue_gesamtbilanz.get("bilanz") - eintrag.betrag());
                     break;
                 default:
-                    console.log(`Der Typ "${eintrag.get("typ")}" ist nicht bekannt.`);
+                    console.log(`Der Typ "${eintrag.typ()}" ist nicht bekannt.`);
                     break;
             }
         });
