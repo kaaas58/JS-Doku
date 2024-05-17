@@ -14,7 +14,6 @@ class Navigationsleiste{
     _html_generieren(){
         let navigationsleiste = document.createElement("nav");
         navigationsleiste.setAttribute("id", "navigationsleiste");
-      navigationsleiste
 
 
         let anker = document.createElement("a");
