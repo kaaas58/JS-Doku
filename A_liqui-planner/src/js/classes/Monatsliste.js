@@ -1,6 +1,5 @@
 "use strict";
 
-
 class Monatsliste{
 
     constructor(jahr, monat){
@@ -11,7 +10,6 @@ class Monatsliste{
         this._html = this._html_generieren();
     }
 
-    
     monat(){
         return this._monat;
     }
@@ -58,7 +56,6 @@ class Monatsliste{
     }
 
     _html_generieren(){
-
         let monatsliste = document.createElement("article");
         monatsliste.setAttribute("class", "monatsliste");
 
@@ -86,7 +83,6 @@ class Monatsliste{
         let eintragsliste = document.createElement("ul");
         this._eintraege.forEach(eintrag => eintragsliste.insertAdjacentElement("beforeend", eintrag.html())); // getter aus Eintrag, makiert..
         monatsliste.insertAdjacentElement("beforeend", eintragsliste);
-
         return monatsliste;
     }
 

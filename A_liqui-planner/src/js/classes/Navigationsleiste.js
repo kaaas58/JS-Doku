@@ -1,10 +1,5 @@
 "use strict";
 
-// <!-- Navigationsleiste -->
-// <nav id="navigationsleiste">
-//     <a href="index.html"><span id="markenname">Liqui-Planner</span></a>
-// </nav>
-
 class Navigationsleiste{
 
     constructor(){
@@ -31,8 +26,8 @@ class Navigationsleiste{
 
     anzeigen(){
         let body = document.querySelector("body");
-        if (body !== null) {                                    //alternativ, bedingter tenaerewr ausdruck 
-            body.insertAdjacentElement("afterbegin", this._html);    //  body !== null ? body.insertAdjacentElement("afterbegin", this._html) : null;
+        if (body !== null) {                                    
+            body.insertAdjacentElement("afterbegin", this._html); 
         }
     }
     

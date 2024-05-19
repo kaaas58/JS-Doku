@@ -27,11 +27,10 @@ class Eintrag{
         return this._timestamp;
     }
     html(){
-        return this._html; // getter für Haushaltsbuch, makiert
+        return this._html;
     }
 
     _html_generieren(){                                                              
-
         let listenpunkt = document.createElement("li");     
         this._typ === "einnahme" ? listenpunkt.setAttribute("class", "einnahme") : listenpunkt.setAttribute("class", "ausgabe");
         listenpunkt.setAttribute("data-timestamp" ,this._timestamp); 
@@ -67,7 +66,6 @@ class Eintrag{
         button.insertAdjacentElement("afterbegin", icon);
     
         this._eintrag_entfernen_event_hinzufuegen(listenpunkt);
-    
         return listenpunkt;
     }
 

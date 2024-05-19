@@ -7,7 +7,6 @@ class Eingabeformular{
     }
 
     _formulardaten_holen(e){
-       
         return {
             titel: e.target.elements.titel.value,
             betrag: e.target.elements.betrag.value,
@@ -26,7 +25,6 @@ class Eingabeformular{
     }
 
     _formulardaten_validieren(formulardaten){
-
         let fehler = [];
         if(formulardaten.titel === ""){
             fehler.push("Titel");
@@ -68,7 +66,6 @@ class Eingabeformular{
     }
    
         _html_generieren() {
-            
             let eingabeformular = document.createElement("section");
             eingabeformular.setAttribute("id", "eingabeformular-container");
             eingabeformular.innerHTML = `<form id="eingabeformular" action="#" method="get"></form>
@@ -98,7 +95,6 @@ class Eingabeformular{
             </div>`;
             
             this._absenden_event_hinzufuegen(eingabeformular);
-            
             return eingabeformular;
         }
         
@@ -109,8 +105,5 @@ class Eingabeformular{
                 this._datum_aktualisieren();
             }
         }
-    
-    
-
     
 }

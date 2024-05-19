@@ -7,7 +7,7 @@ class Fehler{
         this._formular_fehler = formular_fehler;
         this._html = this._html_generieren();
     }
-    
+
     _html_generieren(){
         let fehlerbox = document.createElement("div");
         fehlerbox.setAttribute("class", "fehlerbox");
@@ -23,7 +23,6 @@ class Fehler{
             fehlerliste.insertAdjacentElement("beforeend", fehlerlistenpunkt);
         });
         fehlerbox.insertAdjacentElement("beforeend", fehlerliste);
-
         return fehlerbox;
     }
     

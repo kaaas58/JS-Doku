@@ -18,12 +18,8 @@ class Gesamtbilanz{
                 case "einnahme":
                   this._einnahmen = this._einnahmen + eintrag.betrag();
                   this._bilanz = this._bilanz + eintrag.betrag();
-                // neue_gesamtbilanz.set("einnahmen", neue_gesamtbilanz.get("einnahmen") + eintrag.betrag());
-                    // neue_gesamtbilanz.set("bilanz", neue_gesamtbilanz.get("bilanz") + eintrag.betrag());
                     break;
                 case "ausgabe":
-                    // neue_gesamtbilanz.set("ausgaben", neue_gesamtbilanz.get("ausgaben") + eintrag.betrag());
-                    // neue_gesamtbilanz.set("bilanz", neue_gesamtbilanz.get("bilanz") - eintrag.betrag());
                     this._ausgaben = this._ausgaben + eintrag.betrag();
                     this._bilanz = this._bilanz - eintrag.betrag();
                     break;
@@ -37,7 +33,6 @@ class Gesamtbilanz{
     }
 
     _html_generieren(){
-        
         let gesamtbilanz = document.createElement("aside");
         gesamtbilanz.setAttribute("id", "gesamtbilanz");
 
@@ -82,7 +77,6 @@ class Gesamtbilanz{
     }
 
     anzeigen(){
-
         let gesamtbilanz = document.querySelector("#gesamtbilanz");
         if(gesamtbilanz !== null){
             gesamtbilanz.remove();
