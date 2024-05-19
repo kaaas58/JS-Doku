@@ -7,7 +7,6 @@ class Gesamtbilanz{
         this._ausgaben = 0;
         this._bilanz = 0;
         this._html = this._html_generieren();
-        this._anzeigen();
     }
 
     aktualisieren(eintraege) {
@@ -34,7 +33,7 @@ class Gesamtbilanz{
             }
         });
         this._html = this._html_generieren();
-        this._anzeigen();
+        this.anzeigen();
     }
 
     _html_generieren(){
@@ -82,7 +81,7 @@ class Gesamtbilanz{
         return gesamtbilanz;
     }
 
-    _anzeigen(){
+    anzeigen(){
 
         let gesamtbilanz = document.querySelector("#gesamtbilanz");
         if(gesamtbilanz !== null){
