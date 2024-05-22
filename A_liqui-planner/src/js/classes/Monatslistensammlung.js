@@ -1,6 +1,7 @@
-"use strict";
+// "use strict"; nicht benötigt, da ion modul gesetzt.
+import Monatsliste from "./Monatsliste.js";
 
-class Monatslistensammlung{
+export default class Monatslistensammlung{
 
     constructor(){
         this._monatslisten = [];
@@ -63,14 +64,19 @@ class Monatslistensammlung{
         this.anzeigen();
     }
 
+
+    _entfernen(){
+        let monatslistensammlung = document.querySelector("#monatslisten");
+        if(monatslistensammlung !== null){
+            monatslistensammlung.remove();
+        }
+    }
+
     anzeigen(){
        let eingabeformular_container = document.querySelector("#eingabeformular-container");
-       let monatslistensammlung = document.querySelector("#monatslisten");
        if(eingabeformular_container !== null){
-            if(monatslistensammlung !== null){
-                monatslistensammlung.remove();
-            }
-            eingabeformular_container.insertAdjacentElement("afterend", this._html);
+         this._entfernen();
+         eingabeformular_container.insertAdjacentElement("afterend", this._html);
        }
      }
 

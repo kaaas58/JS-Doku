@@ -1,6 +1,6 @@
-"use strict";
+// "use strict";
 
-class Gesamtbilanz{
+export default class Gesamtbilanz{
 
     constructor(){
         this._einnahmen = 0;
@@ -76,11 +76,18 @@ class Gesamtbilanz{
         return gesamtbilanz;
     }
 
-    anzeigen(){
+    /**
+     * Diese Private Methode entfernt eine bereits bestehende Gesamtbilanz, wenn vorhanden.
+     */
+    _entfernen(){
         let gesamtbilanz = document.querySelector("#gesamtbilanz");
         if(gesamtbilanz !== null){
             gesamtbilanz.remove();
         }
+    }
+
+    anzeigen(){
+      this._entfernen();
         document.querySelector("body").insertAdjacentElement("beforeend", this._html);
     }
 

@@ -1,6 +1,6 @@
-"use strict";
+// "use strict";
 
-class Navigationsleiste{
+export default class Navigationsleiste{
 
     constructor(){
         this._html = this._html_generieren();
